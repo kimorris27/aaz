@@ -1256,7 +1256,6 @@
           <arg type="password" var="$virtualMachineUpdateParameters.properties.vmImageRepositoryCredentials.password" options="password" group="">
             <help short="The password or token used to access an image in the target repository."/>
             <format minLength="1"/>
-            <prompt msg="Password:"/>
           </arg>
           <arg type="string" var="$virtualMachineUpdateParameters.properties.vmImageRepositoryCredentials.registryUrl" options="registry-url">
             <help short="The URL of the authentication server used to validate the repository credentials."/>
