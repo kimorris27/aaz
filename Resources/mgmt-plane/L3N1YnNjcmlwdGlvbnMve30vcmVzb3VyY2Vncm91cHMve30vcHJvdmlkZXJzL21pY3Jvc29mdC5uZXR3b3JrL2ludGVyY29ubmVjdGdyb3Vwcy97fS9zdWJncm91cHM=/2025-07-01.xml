@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CodeGen plane="mgmt-plane">
+  <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.network/interconnectgroups/{}/subgroups" version="2025-07-01" swagger="mgmt-plane/network/ResourceProviders/Microsoft.Network/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay9pbnRlcmNvbm5lY3RHcm91cHMve2ludGVyY29ubmVjdEdyb3VwTmFtZX0vc3ViZ3JvdXBz/V/MjAyNS0wNy0wMQ=="/>
+  <commandGroup name="interconnect-group subgroup">
+    <command name="list" version="2025-07-01">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.network/interconnectgroups/{}/subgroups" version="2025-07-01" swagger="mgmt-plane/network/ResourceProviders/Microsoft.Network/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay9pbnRlcmNvbm5lY3RHcm91cHMve2ludGVyY29ubmVjdEdyb3VwTmFtZX0vc3ViZ3JvdXBz/V/MjAyNS0wNy0wMQ=="/>
+      <argGroup name="">
+        <arg type="string" var="$Path.interconnectGroupName" options="interconnect-group-name" required="True" idPart="name">
+          <help short="The name of the interconnect group."/>
+          <format pattern="^[^_\W][\w-._]{0,79}(?<![-.])$"/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+      </argGroup>
+      <operation operationId="Subgroups_List">
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups">
+          <request method="get">
+            <path>
+              <param type="string" name="interconnectGroupName" arg="$Path.interconnectGroupName" required="True">
+                <format pattern="^[^_\W][\w-._]{0,79}(?<![-.])$"/>
+              </param>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format pattern="^[-\w\._\(\)]+$" maxLength="90" minLength="1"/>
+              </param>
+              <param type="uuid" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2025-07-01&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+          </request>
+          <response statusCode="200">
+            <body>
+              <json var="$Instance">
+                <schema type="object">
+                  <prop type="string" name="nextLink"/>
+                  <prop type="array<object>" name="value" required="True">
+                    <item type="object">
+                      <prop type="string" name="id"/>
+                      <prop type="string" name="name"/>
+                      <prop type="object" name="properties" clientFlatten="True">
+                        <prop readOnly="True" type="object" name="interconnectBlock" cls="CommonSubResource_read">
+                          <prop type="string" name="id"/>
+                        </prop>
+                        <prop readOnly="True" type="string" name="internalSubgroupId"/>
+                        <prop readOnly="True" type="string" name="provisioningState">
+                          <enum>
+                            <item value="&quot;Canceled&quot;"/>
+                            <item value="&quot;Creating&quot;"/>
+                            <item value="&quot;Deleting&quot;"/>
+                            <item value="&quot;Failed&quot;"/>
+                            <item value="&quot;Succeeded&quot;"/>
+                            <item value="&quot;Updating&quot;"/>
+                          </enum>
+                        </prop>
+                        <prop readOnly="True" type="array<@CommonSubResource_read>" name="virtualMachines">
+                          <item type="@CommonSubResource_read"/>
+                        </prop>
+                      </prop>
+                      <prop readOnly="True" type="string" name="type"/>
+                    </item>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </response>
+          <response isError="True">
+            <body>
+              <json>
+                <schema readOnly="True" type="@ODataV4Format"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+      <output type="array" ref="$Instance.value" clientFlatten="True" nextLink="$Instance.nextLink"/>
+    </command>
+  </commandGroup>
+</CodeGen>
