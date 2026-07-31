@@ -25,3 +25,14 @@ Lists all marketplace agreements for Datadog services in your Azure subscription
     ```bash
         datadog terms list
     ```
+
+### [2025-12-26-preview](/Resources/mgmt-plane/L3N1YnNjcmlwdGlvbnMve30vcHJvdmlkZXJzL21pY3Jvc29mdC5kYXRhZG9nL2FncmVlbWVudHM=/2025-12-26-preview.xml) **Preview**
+
+<!-- mgmt-plane /subscriptions/{}/providers/microsoft.datadog/agreements 2025-12-26-preview -->
+
+#### examples
+
+- MarketplaceAgreements_List
+    ```bash
+        datadog terms list
+    ```

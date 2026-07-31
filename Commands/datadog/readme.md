@@ -18,3 +18,8 @@ Manage Datadog
 
 - [terms](/Commands/datadog/terms/readme.md)
 : Provides a set of commands to manage marketplace agreements for Datadog services, enabling you to handle subscription and billing agreements through Azure Marketplace.
+
+## Commands
+
+- [activate-saas](/Commands/datadog/_activate-saas.md)
+: Resolve the token to get the SaaS resource ID and activate the SaaS resource
