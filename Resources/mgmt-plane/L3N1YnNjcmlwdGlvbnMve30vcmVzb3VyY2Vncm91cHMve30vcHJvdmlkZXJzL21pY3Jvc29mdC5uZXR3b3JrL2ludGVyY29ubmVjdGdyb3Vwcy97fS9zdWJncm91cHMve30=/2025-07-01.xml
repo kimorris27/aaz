@@ -5,7 +5,7 @@
     <command name="show" version="2025-07-01">
       <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.network/interconnectgroups/{}/subgroups/{}" version="2025-07-01" swagger="mgmt-plane/network/ResourceProviders/Microsoft.Network/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay9pbnRlcmNvbm5lY3RHcm91cHMve2ludGVyY29ubmVjdEdyb3VwTmFtZX0vc3ViZ3JvdXBzL3tzdWJncm91cE5hbWV9/V/MjAyNS0wNy0wMQ=="/>
       <argGroup name="">
-        <arg type="string" var="$Path.interconnectGroupName" options="interconnect-group-name" required="True" idPart="name">
+        <arg type="string" var="$Path.interconnectGroupName" options="interconnect-group-name group-name" required="True" group="" idPart="name">
           <help short="The name of the interconnect group."/>
           <format pattern="^[^_\W][\w-._]{0,79}(?<![-.])$"/>
         </arg>
