@@ -25,3 +25,14 @@ Creates a new marketplace agreement for Datadog services in your Azure subscript
     ```bash
         datadog terms create --accepted True
     ```
+
+### [2025-12-26-preview](/Resources/mgmt-plane/L3N1YnNjcmlwdGlvbnMve30vcHJvdmlkZXJzL21pY3Jvc29mdC5kYXRhZG9nL2FncmVlbWVudHMvZGVmYXVsdA==/2025-12-26-preview.xml) **Preview**
+
+<!-- mgmt-plane /subscriptions/{}/providers/microsoft.datadog/agreements/default 2025-12-26-preview -->
+
+#### examples
+
+- MarketplaceAgreements_CreateOrUpdate
+    ```bash
+        datadog terms create --accepted True
+    ```

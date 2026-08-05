@@ -27,3 +27,15 @@ Retrieves a list of all Datadog monitor resources either within a specific resou
     ```bash
         datadog monitor list [--resource-group]
     ```
+
+### [2025-12-26-preview](/Resources/mgmt-plane/L3N1YnNjcmlwdGlvbnMve30vcHJvdmlkZXJzL21pY3Jvc29mdC5kYXRhZG9nL21vbml0b3Jz/2025-12-26-preview.xml) **Preview**
+
+<!-- mgmt-plane /subscriptions/{}/providers/microsoft.datadog/monitors 2025-12-26-preview -->
+<!-- mgmt-plane /subscriptions/{}/resourcegroups/{}/providers/microsoft.datadog/monitors 2025-12-26-preview -->
+
+#### examples
+
+- Monitors_List
+    ```bash
+        datadog monitor list [--resource-group]
+    ```

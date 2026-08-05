@@ -25,3 +25,14 @@ Deletes an existing Datadog monitor resource from your Azure subscription, remov
     ```bash
         datadog monitor delete --resource-group myResourceGroup --monitor-name myMonitor
     ```
+
+### [2025-12-26-preview](/Resources/mgmt-plane/L3N1YnNjcmlwdGlvbnMve30vcmVzb3VyY2Vncm91cHMve30vcHJvdmlkZXJzL21pY3Jvc29mdC5kYXRhZG9nL21vbml0b3JzL3t9/2025-12-26-preview.xml) **Preview**
+
+<!-- mgmt-plane /subscriptions/{}/resourcegroups/{}/providers/microsoft.datadog/monitors/{} 2025-12-26-preview -->
+
+#### examples
+
+- Monitors_Delete
+    ```bash
+        datadog monitor delete --resource-group myResourceGroup --monitor-name myMonitor
+    ```

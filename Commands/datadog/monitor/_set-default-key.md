@@ -25,3 +25,14 @@ Sets the default Datadog API key for the specified monitor resource, which will 
     ```bash
         datadog monitor set-default-key --resource-group myResourceGroup --monitor-name myMonitor --key 1111111111111111aaaaaaaaaaaaaaaa
     ```
+
+### [2025-12-26-preview](/Resources/mgmt-plane/L3N1YnNjcmlwdGlvbnMve30vcmVzb3VyY2Vncm91cHMve30vcHJvdmlkZXJzL21pY3Jvc29mdC5kYXRhZG9nL21vbml0b3JzL3t9L3NldGRlZmF1bHRrZXk=/2025-12-26-preview.xml) **Preview**
+
+<!-- mgmt-plane /subscriptions/{}/resourcegroups/{}/providers/microsoft.datadog/monitors/{}/setdefaultkey 2025-12-26-preview -->
+
+#### examples
+
+- Monitors_SetDefaultKey
+    ```bash
+        datadog monitor set-default-key --resource-group myResourceGroup --monitor-name myMonitor --key 1111111111111111aaaaaaaaaaaaaaaa
+    ```

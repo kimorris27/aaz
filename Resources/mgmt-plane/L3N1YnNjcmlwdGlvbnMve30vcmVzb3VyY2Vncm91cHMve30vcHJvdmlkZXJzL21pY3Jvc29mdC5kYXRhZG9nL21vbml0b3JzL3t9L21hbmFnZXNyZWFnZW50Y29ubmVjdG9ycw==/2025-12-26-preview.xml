@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CodeGen plane="mgmt-plane">
+  <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.datadog/monitors/{}/managesreagentconnectors" version="2025-12-26-preview" swagger="mgmt-plane/datadog/ResourceProviders/Microsoft.Datadog/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuRGF0YWRvZy9tb25pdG9ycy97bW9uaXRvck5hbWV9L21hbmFnZVNyZUFnZW50Q29ubmVjdG9ycw==/V/MjAyNS0xMi0yNi1wcmV2aWV3"/>
+  <commandGroup name="datadog monitor">
+    <command name="manage-sre-agent-connector" version="2025-12-26-preview">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.datadog/monitors/{}/managesreagentconnectors" version="2025-12-26-preview" swagger="mgmt-plane/datadog/ResourceProviders/Microsoft.Datadog/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuRGF0YWRvZy9tb25pdG9ycy97bW9uaXRvck5hbWV9L21hbmFnZVNyZUFnZW50Q29ubmVjdG9ycw==/V/MjAyNS0xMi0yNi1wcmV2aWV3"/>
+      <argGroup name="">
+        <arg type="string" var="$Path.monitorName" options="monitor-name" required="True" idPart="name">
+          <help short="Monitor resource name"/>
+          <format pattern="^[a-zA-Z0-9_][a-zA-Z0-9_-]+$" maxLength="32" minLength="2"/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+      </argGroup>
+      <argGroup name="Request">
+        <arg type="string" var="$request.action" options="action" required="True" group="Request">
+          <help short="Add/Remove action."/>
+          <enum>
+            <item name="Add" value="&quot;Add&quot;"/>
+            <item name="Remove" value="&quot;Remove&quot;"/>
+          </enum>
+        </arg>
+        <arg type="array<object>" var="$request.mcpConnectorResourceIdList" options="mcp-connector-resource-id-list" required="True" group="Request">
+          <help short="The list of ARM resource ID of the MCP connector integrated with SRE Agent resource."/>
+          <item type="object">
+            <arg type="string" var="$request.mcpConnectorResourceIdList[].mcpConnectorResourceId" options="mcp-connector-resource-id" required="True">
+              <help short="The ARM resource ID of the MCP connector integrated with SRE Agent resource."/>
+            </arg>
+          </item>
+        </arg>
+      </argGroup>
+      <operation operationId="Monitors_ManageSreAgentConnectors">
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/manageSreAgentConnectors">
+          <request method="post">
+            <path>
+              <param type="string" name="monitorName" arg="$Path.monitorName" required="True">
+                <format pattern="^[a-zA-Z0-9_][a-zA-Z0-9_-]+$" maxLength="32" minLength="2"/>
+              </param>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
+              <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2025-12-26-preview&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+            <body>
+              <json>
+                <schema type="object" name="request" required="True" clientFlatten="True">
+                  <prop type="string" name="action" arg="$request.action" required="True">
+                    <enum>
+                      <item value="&quot;Add&quot;"/>
+                      <item value="&quot;Remove&quot;"/>
+                    </enum>
+                  </prop>
+                  <prop type="array<object>" name="mcpConnectorResourceIdList" arg="$request.mcpConnectorResourceIdList" required="True" identifiers="mcpConnectorResourceId">
+                    <item type="object">
+                      <prop type="string" name="mcpConnectorResourceId" arg="$request.mcpConnectorResourceIdList[].mcpConnectorResourceId" required="True"/>
+                    </item>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </request>
+          <response statusCode="200">
+            <body>
+              <json var="$Instance">
+                <schema type="object">
+                  <prop type="string" name="nextLink"/>
+                  <prop type="array<object>" name="value" required="True">
+                    <item type="object">
+                      <prop type="string" name="mcpConnectorResourceId" required="True"/>
+                    </item>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </response>
+          <response isError="True">
+            <body>
+              <json>
+                <schema type="@MgmtErrorFormat"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+      <output type="object" ref="$Instance" clientFlatten="True"/>
+    </command>
+  </commandGroup>
+</CodeGen>
