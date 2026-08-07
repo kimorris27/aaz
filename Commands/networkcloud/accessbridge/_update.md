@@ -34,5 +34,5 @@ Update properties of the provided access bridge, or update tags associated with 
 
 - Patch access bridge resource
     ```bash
-        etworkcloud accessbridge update --resource-group resourceGroupName --access-bridge-name Bastion --security-rules "[{description:'Allow management plane egress',port:24562-24570,ipv4-addresses:[10.10.20.10-10.10.20.20],ipv6-addresses:['2001:db8:abcd:12::1000-2001:db8:abcd:12::1fff'],direction:Outbound}]"
+        networkcloud accessbridge update --resource-group resourceGroupName --access-bridge-name Bastion --security-rules "[{description:'Allow management plane egress',port:24562-24570,ipv4-addresses:[10.10.20.10-10.10.20.20],ipv6-addresses:['2001:db8:abcd:12::1000-2001:db8:abcd:12::1fff'],direction:Outbound}]"
     ```
