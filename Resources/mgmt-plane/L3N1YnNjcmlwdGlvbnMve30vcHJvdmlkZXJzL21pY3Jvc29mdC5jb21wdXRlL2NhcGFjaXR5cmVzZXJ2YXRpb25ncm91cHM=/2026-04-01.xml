@@ -25,12 +25,6 @@
           </enum>
         </arg>
       </argGroup>
-      <condition var="$Condition_CapacityReservationGroups_ListByResourceGroup">
-        <operator type="and">
-          <operator type="hasValue" arg="$Path.resourceGroupName"/>
-          <operator type="hasValue" arg="$Path.subscriptionId"/>
-        </operator>
-      </condition>
       <condition var="$Condition_CapacityReservationGroups_ListBySubscription">
         <operator type="and">
           <operator type="hasValue" arg="$Path.subscriptionId"/>
@@ -39,13 +33,16 @@
           </operator>
         </operator>
       </condition>
-      <operation when="$Condition_CapacityReservationGroups_ListByResourceGroup" operationId="CapacityReservationGroups_ListByResourceGroup">
-        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups">
+      <condition var="$Condition_CapacityReservationGroups_ListByResourceGroup">
+        <operator type="and">
+          <operator type="hasValue" arg="$Path.resourceGroupName"/>
+          <operator type="hasValue" arg="$Path.subscriptionId"/>
+        </operator>
+      </condition>
+      <operation when="$Condition_CapacityReservationGroups_ListBySubscription" operationId="CapacityReservationGroups_ListBySubscription">
+        <http path="/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups">
           <request method="get">
             <path>
-              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
-                <format maxLength="90" minLength="1"/>
-              </param>
               <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
                 <format minLength="1"/>
               </param>
@@ -55,6 +52,13 @@
                 <enum>
                   <item value="&quot;virtualMachineScaleSetVMs/$ref&quot;"/>
                   <item value="&quot;virtualMachines/$ref&quot;"/>
+                </enum>
+              </param>
+              <param type="string" name="resourceIdsOnly" arg="$Query.resourceIdsOnly">
+                <enum>
+                  <item value="&quot;All&quot;"/>
+                  <item value="&quot;CreatedInSubscription&quot;"/>
+                  <item value="&quot;SharedWithSubscription&quot;"/>
                 </enum>
               </param>
               <const readOnly="True" const="True" type="string" name="api-version" required="True">
@@ -85,6 +89,19 @@
                           <prop readOnly="True" type="array<object>" name="capacityReservations" identifiers="name">
                             <item type="object">
                               <prop readOnly="True" type="string" name="name"/>
+                              <prop type="object" name="reservationStateInfo">
+                                <prop type="string" name="reservationState">
+                                  <enum>
+                                    <item value="&quot;Approved&quot;"/>
+                                    <item value="&quot;Committed&quot;"/>
+                                    <item value="&quot;Declined&quot;"/>
+                                    <item value="&quot;FulfillmentFailed&quot;"/>
+                                    <item value="&quot;Live&quot;"/>
+                                    <item value="&quot;PartiallyFulfilled&quot;"/>
+                                    <item value="&quot;Pending&quot;"/>
+                                  </enum>
+                                </prop>
+                              </prop>
                               <prop type="array<object>" name="statuses">
                                 <item type="object">
                                   <prop type="string" name="code"/>
@@ -187,10 +204,13 @@
           </response>
         </http>
       </operation>
-      <operation when="$Condition_CapacityReservationGroups_ListBySubscription" operationId="CapacityReservationGroups_ListBySubscription">
-        <http path="/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups">
+      <operation when="$Condition_CapacityReservationGroups_ListByResourceGroup" operationId="CapacityReservationGroups_ListByResourceGroup">
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups">
           <request method="get">
             <path>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
               <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
                 <format minLength="1"/>
               </param>
@@ -228,6 +248,19 @@
                           <prop readOnly="True" type="array<object>" name="capacityReservations" identifiers="name">
                             <item type="object">
                               <prop readOnly="True" type="string" name="name"/>
+                              <prop type="object" name="reservationStateInfo">
+                                <prop type="string" name="reservationState">
+                                  <enum>
+                                    <item value="&quot;Approved&quot;"/>
+                                    <item value="&quot;Committed&quot;"/>
+                                    <item value="&quot;Declined&quot;"/>
+                                    <item value="&quot;FulfillmentFailed&quot;"/>
+                                    <item value="&quot;Live&quot;"/>
+                                    <item value="&quot;PartiallyFulfilled&quot;"/>
+                                    <item value="&quot;Pending&quot;"/>
+                                  </enum>
+                                </prop>
+                              </prop>
                               <prop type="array<object>" name="statuses">
                                 <item type="object">
                                   <prop type="string" name="code"/>

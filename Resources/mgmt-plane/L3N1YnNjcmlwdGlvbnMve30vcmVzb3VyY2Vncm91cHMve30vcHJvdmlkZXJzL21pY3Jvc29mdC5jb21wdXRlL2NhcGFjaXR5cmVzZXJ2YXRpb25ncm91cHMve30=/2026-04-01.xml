@@ -60,6 +60,19 @@
                       <prop readOnly="True" type="array<object>" name="capacityReservations" identifiers="name">
                         <item type="object">
                           <prop readOnly="True" type="string" name="name"/>
+                          <prop type="object" name="reservationStateInfo">
+                            <prop type="string" name="reservationState">
+                              <enum>
+                                <item value="&quot;Approved&quot;"/>
+                                <item value="&quot;Committed&quot;"/>
+                                <item value="&quot;Declined&quot;"/>
+                                <item value="&quot;FulfillmentFailed&quot;"/>
+                                <item value="&quot;Live&quot;"/>
+                                <item value="&quot;PartiallyFulfilled&quot;"/>
+                                <item value="&quot;Pending&quot;"/>
+                              </enum>
+                            </prop>
+                          </prop>
                           <prop type="array<object>" name="statuses">
                             <item type="object">
                               <prop type="string" name="code"/>
@@ -316,6 +329,19 @@
                       <prop readOnly="True" type="array<object>" name="capacityReservations" identifiers="name">
                         <item type="object">
                           <prop readOnly="True" type="string" name="name"/>
+                          <prop type="object" name="reservationStateInfo">
+                            <prop type="string" name="reservationState">
+                              <enum>
+                                <item value="&quot;Approved&quot;"/>
+                                <item value="&quot;Committed&quot;"/>
+                                <item value="&quot;Declined&quot;"/>
+                                <item value="&quot;FulfillmentFailed&quot;"/>
+                                <item value="&quot;Live&quot;"/>
+                                <item value="&quot;PartiallyFulfilled&quot;"/>
+                                <item value="&quot;Pending&quot;"/>
+                              </enum>
+                            </prop>
+                          </prop>
                           <prop type="array<object>" name="statuses">
                             <item type="object">
                               <prop type="string" name="code"/>
@@ -521,6 +547,19 @@
                       <prop readOnly="True" type="array<object>" name="capacityReservations" identifiers="name">
                         <item type="object">
                           <prop readOnly="True" type="string" name="name"/>
+                          <prop type="object" name="reservationStateInfo">
+                            <prop type="string" name="reservationState">
+                              <enum>
+                                <item value="&quot;Approved&quot;"/>
+                                <item value="&quot;Committed&quot;"/>
+                                <item value="&quot;Declined&quot;"/>
+                                <item value="&quot;FulfillmentFailed&quot;"/>
+                                <item value="&quot;Live&quot;"/>
+                                <item value="&quot;PartiallyFulfilled&quot;"/>
+                                <item value="&quot;Pending&quot;"/>
+                              </enum>
+                            </prop>
+                          </prop>
                           <prop type="array<object>" name="statuses">
                             <item type="object">
                               <prop type="string" name="code"/>
