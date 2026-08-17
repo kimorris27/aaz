@@ -665,7 +665,7 @@
                       </prop>
                       <prop type="array<object>" name="networkInterfaces">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="properties" clientFlatten="True">
                             <prop type="string" name="deleteOption">
                               <enum>
@@ -952,7 +952,7 @@
                       <prop type="object" name="imageReference">
                         <prop type="string" name="communityGalleryImageId"/>
                         <prop readOnly="True" type="string" name="exactVersion"/>
-                        <prop type="string" name="id"/>
+                        <prop type="ResourceId" name="id"/>
                         <prop type="string" name="offer"/>
                         <prop type="string" name="publisher"/>
                         <prop type="string" name="sharedGalleryImageId"/>
@@ -1002,7 +1002,7 @@
                           <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                             <prop type="string" name="secretUrl" required="True"/>
                             <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
                           </prop>
                           <prop type="boolean" name="enabled"/>
@@ -1044,9 +1044,9 @@
                             </prop>
                           </prop>
                           <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                           </prop>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="securityProfile">
                             <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                             <prop type="string" name="securityEncryptionType">
@@ -1824,7 +1824,7 @@
           <arg type="array<object>" var="$parameters.properties.networkProfile.networkInterfaces" options="network-interfaces">
             <help short="Specifies the list of resource Ids for the network interfaces associated with the virtual machine."/>
             <item type="object">
-              <arg type="string" var="$parameters.properties.networkProfile.networkInterfaces[].id" options="id">
+              <arg type="ResourceId" var="$parameters.properties.networkProfile.networkInterfaces[].id" options="id">
                 <help short="Resource Id"/>
               </arg>
               <arg type="string" var="$parameters.properties.networkProfile.networkInterfaces[].properties.deleteOption" options="delete-option" group="Properties">
@@ -2281,7 +2281,7 @@
             <arg type="string" var="$parameters.properties.storageProfile.imageReference.communityGalleryImageId" options="community-gallery-image-id">
               <help short="Specified the community gallery image unique id for vm deployment. This can be fetched from community gallery image GET call."/>
             </arg>
-            <arg type="string" var="$parameters.properties.storageProfile.imageReference.id" options="id">
+            <arg type="ResourceId" var="$parameters.properties.storageProfile.imageReference.id" options="id">
               <help short="Resource Id"/>
             </arg>
             <arg type="string" var="$parameters.properties.storageProfile.imageReference.offer" options="offer">
@@ -2359,7 +2359,7 @@
                 </arg>
                 <arg type="object" var="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault" options="source-vault" required="True" cls="SubResource_create">
                   <help short="The relative URL of the Key Vault containing the secret."/>
-                  <arg type="string" var="@SubResource_create.id" options="id">
+                  <arg type="ResourceId" var="@SubResource_create.id" options="id">
                     <help short="Resource Id"/>
                   </arg>
                 </arg>
@@ -2436,11 +2436,11 @@
               </arg>
               <arg type="object" var="@ManagedDiskParameters_create.diskEncryptionSet" options="disk-encryption-set" cls="DiskEncryptionSetParameters_create">
                 <help short="Specifies the customer managed disk encryption set resource id for the managed disk."/>
-                <arg type="string" var="@DiskEncryptionSetParameters_create.id" options="id">
+                <arg type="ResourceId" var="@DiskEncryptionSetParameters_create.id" options="id">
                   <help short="Resource Id"/>
                 </arg>
               </arg>
-              <arg type="string" var="@ManagedDiskParameters_create.id" options="id">
+              <arg type="ResourceId" var="@ManagedDiskParameters_create.id" options="id">
                 <help short="Resource Id"/>
               </arg>
               <arg type="object" var="@ManagedDiskParameters_create.securityProfile" options="security-profile">
@@ -2955,7 +2955,7 @@
                       </prop>
                       <prop type="array<object>" name="networkInterfaces" arg="$parameters.properties.networkProfile.networkInterfaces">
                         <item type="object">
-                          <prop type="string" name="id" arg="$parameters.properties.networkProfile.networkInterfaces[].id"/>
+                          <prop type="ResourceId" name="id" arg="$parameters.properties.networkProfile.networkInterfaces[].id"/>
                           <prop type="object" name="properties" clientFlatten="True">
                             <prop type="string" name="deleteOption" arg="$parameters.properties.networkProfile.networkInterfaces[].properties.deleteOption">
                               <enum>
@@ -3239,7 +3239,7 @@
                       </prop>
                       <prop type="object" name="imageReference" arg="$parameters.properties.storageProfile.imageReference">
                         <prop type="string" name="communityGalleryImageId" arg="$parameters.properties.storageProfile.imageReference.communityGalleryImageId"/>
-                        <prop type="string" name="id" arg="$parameters.properties.storageProfile.imageReference.id"/>
+                        <prop type="ResourceId" name="id" arg="$parameters.properties.storageProfile.imageReference.id"/>
                         <prop type="string" name="offer" arg="$parameters.properties.storageProfile.imageReference.offer"/>
                         <prop type="string" name="publisher" arg="$parameters.properties.storageProfile.imageReference.publisher"/>
                         <prop type="string" name="sharedGalleryImageId" arg="$parameters.properties.storageProfile.imageReference.sharedGalleryImageId"/>
@@ -3289,7 +3289,7 @@
                           <prop type="object" name="diskEncryptionKey" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey">
                             <prop type="string" name="secretUrl" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl" required="True"/>
                             <prop type="object" name="sourceVault" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault" required="True" cls="SubResource_create">
-                              <prop type="string" name="id" arg="@SubResource_create.id"/>
+                              <prop type="ResourceId" name="id" arg="@SubResource_create.id"/>
                             </prop>
                           </prop>
                           <prop type="boolean" name="enabled" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.enabled"/>
@@ -3331,9 +3331,9 @@
                             </prop>
                           </prop>
                           <prop type="object" name="diskEncryptionSet" arg="@ManagedDiskParameters_create.diskEncryptionSet" cls="DiskEncryptionSetParameters_create">
-                            <prop type="string" name="id" arg="@DiskEncryptionSetParameters_create.id"/>
+                            <prop type="ResourceId" name="id" arg="@DiskEncryptionSetParameters_create.id"/>
                           </prop>
-                          <prop type="string" name="id" arg="@ManagedDiskParameters_create.id"/>
+                          <prop type="ResourceId" name="id" arg="@ManagedDiskParameters_create.id"/>
                           <prop type="object" name="securityProfile" arg="@ManagedDiskParameters_create.securityProfile">
                             <prop type="@DiskEncryptionSetParameters_create" name="diskEncryptionSet" arg="@ManagedDiskParameters_create.securityProfile.diskEncryptionSet"/>
                             <prop type="string" name="securityEncryptionType" arg="@ManagedDiskParameters_create.securityProfile.securityEncryptionType">
@@ -4010,7 +4010,7 @@
                       </prop>
                       <prop type="array<object>" name="networkInterfaces">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="properties" clientFlatten="True">
                             <prop type="string" name="deleteOption">
                               <enum>
@@ -4297,7 +4297,7 @@
                       <prop type="object" name="imageReference">
                         <prop type="string" name="communityGalleryImageId"/>
                         <prop readOnly="True" type="string" name="exactVersion"/>
-                        <prop type="string" name="id"/>
+                        <prop type="ResourceId" name="id"/>
                         <prop type="string" name="offer"/>
                         <prop type="string" name="publisher"/>
                         <prop type="string" name="sharedGalleryImageId"/>
@@ -4347,7 +4347,7 @@
                           <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                             <prop type="string" name="secretUrl" required="True"/>
                             <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
                           </prop>
                           <prop type="boolean" name="enabled"/>
@@ -4389,9 +4389,9 @@
                             </prop>
                           </prop>
                           <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                           </prop>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="securityProfile">
                             <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                             <prop type="string" name="securityEncryptionType">
@@ -5106,7 +5106,7 @@
           <arg nullable="True" type="array<object>" var="$parameters.properties.networkProfile.networkInterfaces" options="network-interfaces">
             <help short="Specifies the list of resource Ids for the network interfaces associated with the virtual machine."/>
             <item nullable="True" type="object">
-              <arg nullable="True" type="string" var="$parameters.properties.networkProfile.networkInterfaces[].id" options="id">
+              <arg nullable="True" type="ResourceId" var="$parameters.properties.networkProfile.networkInterfaces[].id" options="id">
                 <help short="Resource Id"/>
               </arg>
               <arg nullable="True" type="string" var="$parameters.properties.networkProfile.networkInterfaces[].properties.deleteOption" options="delete-option" group="Properties">
@@ -5563,7 +5563,7 @@
             <arg nullable="True" type="string" var="$parameters.properties.storageProfile.imageReference.communityGalleryImageId" options="community-gallery-image-id">
               <help short="Specified the community gallery image unique id for vm deployment. This can be fetched from community gallery image GET call."/>
             </arg>
-            <arg nullable="True" type="string" var="$parameters.properties.storageProfile.imageReference.id" options="id">
+            <arg nullable="True" type="ResourceId" var="$parameters.properties.storageProfile.imageReference.id" options="id">
               <help short="Resource Id"/>
             </arg>
             <arg nullable="True" type="string" var="$parameters.properties.storageProfile.imageReference.offer" options="offer">
@@ -5641,7 +5641,7 @@
                 </arg>
                 <arg type="object" var="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault" options="source-vault" cls="SubResource_update">
                   <help short="The relative URL of the Key Vault containing the secret."/>
-                  <arg nullable="True" type="string" var="@SubResource_update.id" options="id">
+                  <arg nullable="True" type="ResourceId" var="@SubResource_update.id" options="id">
                     <help short="Resource Id"/>
                   </arg>
                 </arg>
@@ -5718,11 +5718,11 @@
               </arg>
               <arg nullable="True" type="object" var="@ManagedDiskParameters_update.diskEncryptionSet" options="disk-encryption-set" cls="DiskEncryptionSetParameters_update">
                 <help short="Specifies the customer managed disk encryption set resource id for the managed disk."/>
-                <arg nullable="True" type="string" var="@DiskEncryptionSetParameters_update.id" options="id">
+                <arg nullable="True" type="ResourceId" var="@DiskEncryptionSetParameters_update.id" options="id">
                   <help short="Resource Id"/>
                 </arg>
               </arg>
-              <arg nullable="True" type="string" var="@ManagedDiskParameters_update.id" options="id">
+              <arg nullable="True" type="ResourceId" var="@ManagedDiskParameters_update.id" options="id">
                 <help short="Resource Id"/>
               </arg>
               <arg nullable="True" type="object" var="@ManagedDiskParameters_update.securityProfile" options="security-profile">
@@ -6426,7 +6426,7 @@
                       </prop>
                       <prop type="array<object>" name="networkInterfaces">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="properties" clientFlatten="True">
                             <prop type="string" name="deleteOption">
                               <enum>
@@ -6713,7 +6713,7 @@
                       <prop type="object" name="imageReference">
                         <prop type="string" name="communityGalleryImageId"/>
                         <prop readOnly="True" type="string" name="exactVersion"/>
-                        <prop type="string" name="id"/>
+                        <prop type="ResourceId" name="id"/>
                         <prop type="string" name="offer"/>
                         <prop type="string" name="publisher"/>
                         <prop type="string" name="sharedGalleryImageId"/>
@@ -6763,7 +6763,7 @@
                           <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                             <prop type="string" name="secretUrl" required="True"/>
                             <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
                           </prop>
                           <prop type="boolean" name="enabled"/>
@@ -6805,9 +6805,9 @@
                             </prop>
                           </prop>
                           <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                           </prop>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="object" name="securityProfile">
                             <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                             <prop type="string" name="securityEncryptionType">
@@ -7360,7 +7360,7 @@
                   </prop>
                   <prop type="array<object>" name="networkInterfaces" arg="$parameters.properties.networkProfile.networkInterfaces">
                     <item type="object">
-                      <prop type="string" name="id" arg="$parameters.properties.networkProfile.networkInterfaces[].id"/>
+                      <prop type="ResourceId" name="id" arg="$parameters.properties.networkProfile.networkInterfaces[].id"/>
                       <prop type="object" name="properties" clientFlatten="True">
                         <prop type="string" name="deleteOption" arg="$parameters.properties.networkProfile.networkInterfaces[].properties.deleteOption">
                           <enum>
@@ -7644,7 +7644,7 @@
                   </prop>
                   <prop type="object" name="imageReference" arg="$parameters.properties.storageProfile.imageReference">
                     <prop type="string" name="communityGalleryImageId" arg="$parameters.properties.storageProfile.imageReference.communityGalleryImageId"/>
-                    <prop type="string" name="id" arg="$parameters.properties.storageProfile.imageReference.id"/>
+                    <prop type="ResourceId" name="id" arg="$parameters.properties.storageProfile.imageReference.id"/>
                     <prop type="string" name="offer" arg="$parameters.properties.storageProfile.imageReference.offer"/>
                     <prop type="string" name="publisher" arg="$parameters.properties.storageProfile.imageReference.publisher"/>
                     <prop type="string" name="sharedGalleryImageId" arg="$parameters.properties.storageProfile.imageReference.sharedGalleryImageId"/>
@@ -7694,7 +7694,7 @@
                       <prop type="object" name="diskEncryptionKey" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey">
                         <prop type="string" name="secretUrl" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl" required="True"/>
                         <prop type="object" name="sourceVault" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault" required="True" cls="SubResource_update">
-                          <prop type="string" name="id" arg="@SubResource_update.id"/>
+                          <prop type="ResourceId" name="id" arg="@SubResource_update.id"/>
                         </prop>
                       </prop>
                       <prop type="boolean" name="enabled" arg="$parameters.properties.storageProfile.osDisk.encryptionSettings.enabled"/>
@@ -7736,9 +7736,9 @@
                         </prop>
                       </prop>
                       <prop type="object" name="diskEncryptionSet" arg="@ManagedDiskParameters_update.diskEncryptionSet" cls="DiskEncryptionSetParameters_update">
-                        <prop type="string" name="id" arg="@DiskEncryptionSetParameters_update.id"/>
+                        <prop type="ResourceId" name="id" arg="@DiskEncryptionSetParameters_update.id"/>
                       </prop>
-                      <prop type="string" name="id" arg="@ManagedDiskParameters_update.id"/>
+                      <prop type="ResourceId" name="id" arg="@ManagedDiskParameters_update.id"/>
                       <prop type="object" name="securityProfile" arg="@ManagedDiskParameters_update.securityProfile">
                         <prop type="@DiskEncryptionSetParameters_update" name="diskEncryptionSet" arg="@ManagedDiskParameters_update.securityProfile.diskEncryptionSet"/>
                         <prop type="string" name="securityEncryptionType" arg="@ManagedDiskParameters_update.securityProfile.securityEncryptionType">
@@ -8511,7 +8511,7 @@
                         </prop>
                         <prop type="array<object>" name="networkInterfaces">
                           <item type="object">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="string" name="deleteOption">
                                 <enum>
@@ -8798,7 +8798,7 @@
                         <prop type="object" name="imageReference">
                           <prop type="string" name="communityGalleryImageId"/>
                           <prop readOnly="True" type="string" name="exactVersion"/>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="string" name="offer"/>
                           <prop type="string" name="publisher"/>
                           <prop type="string" name="sharedGalleryImageId"/>
@@ -8848,7 +8848,7 @@
                             <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                               <prop type="string" name="secretUrl" required="True"/>
                               <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                                <prop type="string" name="id"/>
+                                <prop type="ResourceId" name="id"/>
                               </prop>
                             </prop>
                             <prop type="boolean" name="enabled"/>
@@ -8890,9 +8890,9 @@
                               </prop>
                             </prop>
                             <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="securityProfile">
                               <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                               <prop type="string" name="securityEncryptionType">
@@ -9749,7 +9749,7 @@
                         </prop>
                         <prop type="array<object>" name="networkInterfaces">
                           <item type="object">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="string" name="deleteOption">
                                 <enum>
@@ -10036,7 +10036,7 @@
                         <prop type="object" name="imageReference">
                           <prop type="string" name="communityGalleryImageId"/>
                           <prop readOnly="True" type="string" name="exactVersion"/>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="string" name="offer"/>
                           <prop type="string" name="publisher"/>
                           <prop type="string" name="sharedGalleryImageId"/>
@@ -10086,7 +10086,7 @@
                             <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                               <prop type="string" name="secretUrl" required="True"/>
                               <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                                <prop type="string" name="id"/>
+                                <prop type="ResourceId" name="id"/>
                               </prop>
                             </prop>
                             <prop type="boolean" name="enabled"/>
@@ -10128,9 +10128,9 @@
                               </prop>
                             </prop>
                             <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="securityProfile">
                               <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                               <prop type="string" name="securityEncryptionType">
@@ -10970,7 +10970,7 @@
                         </prop>
                         <prop type="array<object>" name="networkInterfaces">
                           <item type="object">
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="string" name="deleteOption">
                                 <enum>
@@ -11257,7 +11257,7 @@
                         <prop type="object" name="imageReference">
                           <prop type="string" name="communityGalleryImageId"/>
                           <prop readOnly="True" type="string" name="exactVersion"/>
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                           <prop type="string" name="offer"/>
                           <prop type="string" name="publisher"/>
                           <prop type="string" name="sharedGalleryImageId"/>
@@ -11307,7 +11307,7 @@
                             <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                               <prop type="string" name="secretUrl" required="True"/>
                               <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                                <prop type="string" name="id"/>
+                                <prop type="ResourceId" name="id"/>
                               </prop>
                             </prop>
                             <prop type="boolean" name="enabled"/>
@@ -11349,9 +11349,9 @@
                               </prop>
                             </prop>
                             <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="object" name="securityProfile">
                               <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                               <prop type="string" name="securityEncryptionType">

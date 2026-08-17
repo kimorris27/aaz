@@ -117,7 +117,7 @@
                     <prop type="object" name="sharingProfile">
                       <prop type="array<object>" name="subscriptionIds">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                         </item>
                       </prop>
                     </prop>
@@ -253,7 +253,7 @@
           <arg type="array<object>" var="$parameters.properties.sharingProfile.subscriptionIds" options="subscription-ids">
             <help short="Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."/>
             <item type="object">
-              <arg type="string" var="$parameters.properties.sharingProfile.subscriptionIds[].id" options="id">
+              <arg type="ResourceId" var="$parameters.properties.sharingProfile.subscriptionIds[].id" options="id">
                 <help short="Resource Id"/>
               </arg>
             </item>
@@ -293,7 +293,7 @@
                     <prop type="object" name="sharingProfile" arg="$parameters.properties.sharingProfile">
                       <prop type="array<object>" name="subscriptionIds" arg="$parameters.properties.sharingProfile.subscriptionIds">
                         <item type="object">
-                          <prop type="string" name="id" arg="$parameters.properties.sharingProfile.subscriptionIds[].id"/>
+                          <prop type="ResourceId" name="id" arg="$parameters.properties.sharingProfile.subscriptionIds[].id"/>
                         </item>
                       </prop>
                     </prop>
@@ -386,7 +386,7 @@
                     <prop type="object" name="sharingProfile">
                       <prop type="array<object>" name="subscriptionIds">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                         </item>
                       </prop>
                     </prop>
@@ -475,7 +475,7 @@
           <arg type="array<object>" var="$parameters.properties.sharingProfile.subscriptionIds" options="subscription-ids">
             <help short="Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."/>
             <item type="object">
-              <arg type="string" var="$parameters.properties.sharingProfile.subscriptionIds[].id" options="id">
+              <arg type="ResourceId" var="$parameters.properties.sharingProfile.subscriptionIds[].id" options="id">
                 <help short="Resource Id"/>
               </arg>
             </item>
@@ -514,7 +514,7 @@
                     <prop type="object" name="sharingProfile" arg="$parameters.properties.sharingProfile">
                       <prop type="array<object>" name="subscriptionIds" arg="$parameters.properties.sharingProfile.subscriptionIds">
                         <item type="object">
-                          <prop type="string" name="id" arg="$parameters.properties.sharingProfile.subscriptionIds[].id"/>
+                          <prop type="ResourceId" name="id" arg="$parameters.properties.sharingProfile.subscriptionIds[].id"/>
                         </item>
                       </prop>
                     </prop>
@@ -604,7 +604,7 @@
                     <prop type="object" name="sharingProfile">
                       <prop type="array<object>" name="subscriptionIds">
                         <item type="object">
-                          <prop type="string" name="id"/>
+                          <prop type="ResourceId" name="id"/>
                         </item>
                       </prop>
                     </prop>

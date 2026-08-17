@@ -146,7 +146,7 @@
                         <prop type="object" name="sharingProfile">
                           <prop type="array<object>" name="subscriptionIds">
                             <item type="object">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </item>
                           </prop>
                         </prop>
@@ -305,7 +305,7 @@
                         <prop type="object" name="sharingProfile">
                           <prop type="array<object>" name="subscriptionIds">
                             <item type="object">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </item>
                           </prop>
                         </prop>

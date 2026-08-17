@@ -664,7 +664,7 @@
                           </prop>
                           <prop type="array<object>" name="networkInterfaces">
                             <item type="object">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                               <prop type="object" name="properties" clientFlatten="True">
                                 <prop type="string" name="deleteOption">
                                   <enum>
@@ -951,7 +951,7 @@
                           <prop type="object" name="imageReference">
                             <prop type="string" name="communityGalleryImageId"/>
                             <prop readOnly="True" type="string" name="exactVersion"/>
-                            <prop type="string" name="id"/>
+                            <prop type="ResourceId" name="id"/>
                             <prop type="string" name="offer"/>
                             <prop type="string" name="publisher"/>
                             <prop type="string" name="sharedGalleryImageId"/>
@@ -1001,7 +1001,7 @@
                               <prop type="object" name="diskEncryptionKey" cls="KeyVaultSecretReference_read">
                                 <prop type="string" name="secretUrl" required="True"/>
                                 <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                                  <prop type="string" name="id"/>
+                                  <prop type="ResourceId" name="id"/>
                                 </prop>
                               </prop>
                               <prop type="boolean" name="enabled"/>
@@ -1043,9 +1043,9 @@
                                 </prop>
                               </prop>
                               <prop type="object" name="diskEncryptionSet" cls="DiskEncryptionSetParameters_read">
-                                <prop type="string" name="id"/>
+                                <prop type="ResourceId" name="id"/>
                               </prop>
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                               <prop type="object" name="securityProfile">
                                 <prop type="@DiskEncryptionSetParameters_read" name="diskEncryptionSet"/>
                                 <prop type="string" name="securityEncryptionType">
