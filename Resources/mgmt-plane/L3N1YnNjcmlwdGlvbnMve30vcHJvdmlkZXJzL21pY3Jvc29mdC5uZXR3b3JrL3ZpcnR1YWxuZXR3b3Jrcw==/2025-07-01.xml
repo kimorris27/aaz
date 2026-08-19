@@ -10,12 +10,6 @@
         <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" idPart="resource_group"/>
         <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
       </argGroup>
-      <condition var="$Condition_VirtualNetworks_List">
-        <operator type="and">
-          <operator type="hasValue" arg="$Path.resourceGroupName"/>
-          <operator type="hasValue" arg="$Path.subscriptionId"/>
-        </operator>
-      </condition>
       <condition var="$Condition_VirtualNetworks_ListAll">
         <operator type="and">
           <operator type="hasValue" arg="$Path.subscriptionId"/>
@@ -24,14 +18,19 @@
           </operator>
         </operator>
       </condition>
-      <operation when="$Condition_VirtualNetworks_List" operationId="VirtualNetworks_List">
-        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks">
+      <condition var="$Condition_VirtualNetworks_List">
+        <operator type="and">
+          <operator type="hasValue" arg="$Path.resourceGroupName"/>
+          <operator type="hasValue" arg="$Path.subscriptionId"/>
+        </operator>
+      </condition>
+      <operation when="$Condition_VirtualNetworks_ListAll" operationId="VirtualNetworks_ListAll">
+        <http path="/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks">
           <request method="get">
             <path>
-              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
-                <format maxLength="90" minLength="1"/>
+              <param type="uuid" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
               </param>
-              <param type="uuid" name="subscriptionId" arg="$Path.subscriptionId" required="True"/>
             </path>
             <query>
               <const readOnly="True" const="True" type="string" name="api-version" required="True">
@@ -49,9 +48,7 @@
                     <item type="object">
                       <prop readOnly="True" type="string" name="etag"/>
                       <prop type="@CommonExtendedLocation_read" name="extendedLocation"/>
-                      <prop type="ResourceId" name="id">
-                        <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworks/{}"/>
-                      </prop>
+                      <prop type="string" name="id"/>
                       <prop type="ResourceLocation" name="location"/>
                       <prop readOnly="True" type="string" name="name"/>
                       <prop type="object" name="properties" clientFlatten="True">
@@ -113,9 +110,7 @@
                         <prop type="array<object>" name="subnets">
                           <item type="object" cls="CommonSubnet_read">
                             <prop readOnly="True" type="string" name="etag"/>
-                            <prop type="ResourceId" name="id">
-                              <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworks/{}/subnets/{}"/>
-                            </prop>
+                            <prop type="string" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="string" name="addressPrefix"/>
@@ -201,9 +196,7 @@
                               <prop type="@CommonSubResource_read" name="natGateway"/>
                               <prop type="object" name="networkSecurityGroup" cls="CommonNetworkSecurityGroup_read">
                                 <prop readOnly="True" type="string" name="etag"/>
-                                <prop type="ResourceId" name="id">
-                                  <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/networkSecurityGroups/{}"/>
-                                </prop>
+                                <prop type="string" name="id"/>
                                 <prop type="ResourceLocation" name="location"/>
                                 <prop readOnly="True" type="string" name="name"/>
                                 <prop type="object" name="properties" clientFlatten="True">
@@ -213,9 +206,7 @@
                                   <prop readOnly="True" type="array<object>" name="flowLogs">
                                     <item type="object" cls="CommonFlowLog_read">
                                       <prop readOnly="True" type="string" name="etag"/>
-                                      <prop type="ResourceId" name="id">
-                                        <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/networkWatchers/{}/flowLogs/{}"/>
-                                      </prop>
+                                      <prop type="string" name="id"/>
                                       <prop type="IdentityObject" name="identity">
                                         <prop readOnly="True" type="string" name="principalId"/>
                                         <prop readOnly="True" type="string" name="tenantId"/>
@@ -296,7 +287,7 @@
                                     <item type="object" cls="CommonNetworkInterface_read">
                                       <prop readOnly="True" type="string" name="etag"/>
                                       <prop type="@CommonExtendedLocation_read" name="extendedLocation"/>
-                                      <prop type="ResourceId" name="id"/>
+                                      <prop type="string" name="id"/>
                                       <prop type="ResourceLocation" name="location"/>
                                       <prop readOnly="True" type="string" name="name"/>
                                       <prop type="object" name="properties" clientFlatten="True">
@@ -339,9 +330,7 @@
                                         <prop type="array<object>" name="ipConfigurations">
                                           <item type="object" cls="CommonNetworkInterfaceIPConfiguration_read">
                                             <prop readOnly="True" type="string" name="etag"/>
-                                            <prop type="ResourceId" name="id">
-                                              <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/networkInterfaces/{}/ipConfigurations/{}"/>
-                                            </prop>
+                                            <prop type="string" name="id"/>
                                             <prop type="string" name="name"/>
                                             <prop type="object" name="properties" clientFlatten="True">
                                               <prop type="array<object>" name="applicationGatewayBackendAddressPools">
@@ -380,9 +369,7 @@
                                               <prop type="array<object>" name="loadBalancerBackendAddressPools">
                                                 <item type="object">
                                                   <prop readOnly="True" type="string" name="etag"/>
-                                                  <prop type="ResourceId" name="id">
-                                                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/loadBalancers/{}/backendAddressPools/{}"/>
-                                                  </prop>
+                                                  <prop type="string" name="id"/>
                                                   <prop type="string" name="name"/>
                                                   <prop type="object" name="properties" clientFlatten="True">
                                                     <prop readOnly="True" type="array<@CommonNetworkInterfaceIPConfiguration_read>" name="backendIPConfigurations">
@@ -470,9 +457,7 @@
                                               <prop type="array<object>" name="loadBalancerInboundNatRules">
                                                 <item type="object">
                                                   <prop readOnly="True" type="string" name="etag"/>
-                                                  <prop type="ResourceId" name="id">
-                                                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/loadBalancers/{}/inboundNatRules/{}"/>
-                                                  </prop>
+                                                  <prop type="string" name="id"/>
                                                   <prop type="string" name="name"/>
                                                   <prop type="object" name="properties" clientFlatten="True">
                                                     <prop type="@CommonSubResource_read" name="backendAddressPool"/>
@@ -546,17 +531,13 @@
                                               <prop type="array<object>" name="virtualNetworkTaps">
                                                 <item type="object" cls="CommonVirtualNetworkTap_read">
                                                   <prop readOnly="True" type="string" name="etag"/>
-                                                  <prop type="ResourceId" name="id">
-                                                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworkTaps/{}"/>
-                                                  </prop>
+                                                  <prop type="string" name="id"/>
                                                   <prop type="ResourceLocation" name="location"/>
                                                   <prop readOnly="True" type="string" name="name"/>
                                                   <prop type="object" name="properties" clientFlatten="True">
                                                     <prop type="object" name="destinationLoadBalancerFrontEndIPConfiguration" cls="CommonFrontendIPConfiguration_read">
                                                       <prop readOnly="True" type="string" name="etag"/>
-                                                      <prop type="ResourceId" name="id">
-                                                        <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/loadBalancers/{}/frontendIPConfigurations/{}"/>
-                                                      </prop>
+                                                      <prop type="string" name="id"/>
                                                       <prop type="string" name="name"/>
                                                       <prop type="object" name="properties" clientFlatten="True">
                                                         <prop type="object" name="ddosSettings">
@@ -601,7 +582,7 @@
                                                         <prop type="object" name="publicIPAddress" cls="CommonPublicIPAddress_read">
                                                           <prop readOnly="True" type="string" name="etag"/>
                                                           <prop type="@CommonExtendedLocation_read" name="extendedLocation"/>
-                                                          <prop type="ResourceId" name="id"/>
+                                                          <prop type="string" name="id"/>
                                                           <prop type="ResourceLocation" name="location"/>
                                                           <prop readOnly="True" type="string" name="name"/>
                                                           <prop type="object" name="properties" clientFlatten="True">
@@ -681,9 +662,7 @@
                                                             </prop>
                                                             <prop type="object" name="natGateway">
                                                             <prop readOnly="True" type="string" name="etag"/>
-                                                            <prop type="ResourceId" name="id">
-                                                            <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/natGateways/{}"/>
-                                                            </prop>
+                                                            <prop type="string" name="id"/>
                                                             <prop type="ResourceLocation" name="location"/>
                                                             <prop readOnly="True" type="string" name="name"/>
                                                             <prop type="object" name="properties" clientFlatten="True">
@@ -806,9 +785,7 @@
                                                     <prop readOnly="True" type="array<object>" name="networkInterfaceTapConfigurations">
                                                       <item type="object" cls="CommonNetworkInterfaceTapConfiguration_read">
                                                         <prop readOnly="True" type="string" name="etag"/>
-                                                        <prop type="ResourceId" name="id">
-                                                          <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/networkInterfaces/{}/tapConfigurations/{}"/>
-                                                        </prop>
+                                                        <prop type="string" name="id"/>
                                                         <prop type="string" name="name"/>
                                                         <prop type="object" name="properties" clientFlatten="True">
                                                           <prop readOnly="True" type="string" name="provisioningState">
@@ -878,9 +855,7 @@
                                               </enum>
                                             </prop>
                                           </prop>
-                                          <prop type="ResourceId" name="id">
-                                            <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/privateEndpoints/{}"/>
-                                          </prop>
+                                          <prop type="string" name="id"/>
                                           <prop type="ResourceLocation" name="location"/>
                                           <prop readOnly="True" type="string" name="name"/>
                                           <prop type="object" name="properties" clientFlatten="True">
@@ -980,9 +955,7 @@
                                         <prop type="object" name="privateLinkService">
                                           <prop readOnly="True" type="string" name="etag"/>
                                           <prop type="@CommonExtendedLocation_read" name="extendedLocation"/>
-                                          <prop type="ResourceId" name="id">
-                                            <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/privateLinkServices/{}"/>
-                                          </prop>
+                                          <prop type="string" name="id"/>
                                           <prop type="ResourceLocation" name="location"/>
                                           <prop readOnly="True" type="string" name="name"/>
                                           <prop type="object" name="properties" clientFlatten="True">
@@ -1047,9 +1020,7 @@
                                             <prop readOnly="True" type="array<object>" name="privateEndpointConnections">
                                               <item type="object">
                                                 <prop readOnly="True" type="string" name="etag"/>
-                                                <prop type="ResourceId" name="id">
-                                                  <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/privateLinkServices/{}/privateEndpointConnections/{}"/>
-                                                </prop>
+                                                <prop type="string" name="id"/>
                                                 <prop type="string" name="name"/>
                                                 <prop type="object" name="properties" clientFlatten="True">
                                                   <prop readOnly="True" type="string" name="linkIdentifier"/>
@@ -1135,7 +1106,7 @@
                                   <prop type="array<object>" name="securityRules">
                                     <item type="object" cls="CommonSecurityRule_read">
                                       <prop readOnly="True" type="string" name="etag"/>
-                                      <prop type="ResourceId" name="id"/>
+                                      <prop type="string" name="id"/>
                                       <prop type="string" name="name"/>
                                       <prop type="object" name="properties" clientFlatten="True">
                                         <prop type="string" name="access" required="True">
@@ -1190,9 +1161,7 @@
                                         <prop type="array<object>" name="sourceApplicationSecurityGroups">
                                           <item type="object" cls="CommonApplicationSecurityGroup_read">
                                             <prop readOnly="True" type="string" name="etag"/>
-                                            <prop type="ResourceId" name="id">
-                                              <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/applicationSecurityGroups/{}"/>
-                                            </prop>
+                                            <prop type="string" name="id"/>
                                             <prop type="ResourceLocation" name="location"/>
                                             <prop readOnly="True" type="string" name="name"/>
                                             <prop type="object" name="properties" clientFlatten="True">
@@ -1289,9 +1258,7 @@
                               </prop>
                               <prop type="object" name="routeTable">
                                 <prop readOnly="True" type="string" name="etag"/>
-                                <prop type="ResourceId" name="id">
-                                  <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/routeTables/{}"/>
-                                </prop>
+                                <prop type="string" name="id"/>
                                 <prop type="ResourceLocation" name="location"/>
                                 <prop readOnly="True" type="string" name="name"/>
                                 <prop type="object" name="properties" clientFlatten="True">
@@ -1316,9 +1283,7 @@
                                   <prop type="array<object>" name="routes">
                                     <item type="object">
                                       <prop readOnly="True" type="string" name="etag"/>
-                                      <prop type="ResourceId" name="id">
-                                        <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/routeTables/{}/routes/{}"/>
-                                      </prop>
+                                      <prop type="string" name="id"/>
                                       <prop type="string" name="name"/>
                                       <prop type="object" name="properties" clientFlatten="True">
                                         <prop type="string" name="addressPrefix"/>
@@ -1394,9 +1359,7 @@
                               <prop type="array<object>" name="serviceEndpointPolicies">
                                 <item type="object">
                                   <prop readOnly="True" type="string" name="etag"/>
-                                  <prop type="ResourceId" name="id">
-                                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/serviceEndpointPolicies/{}"/>
-                                  </prop>
+                                  <prop type="string" name="id"/>
                                   <prop readOnly="True" type="string" name="kind"/>
                                   <prop type="ResourceLocation" name="location"/>
                                   <prop readOnly="True" type="string" name="name"/>
@@ -1419,9 +1382,7 @@
                                     <prop type="array<object>" name="serviceEndpointPolicyDefinitions">
                                       <item type="object">
                                         <prop readOnly="True" type="string" name="etag"/>
-                                        <prop type="ResourceId" name="id">
-                                          <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/serviceEndpointPolicies/{}/serviceEndpointPolicyDefinitions/{}"/>
-                                        </prop>
+                                        <prop type="string" name="id"/>
                                         <prop type="string" name="name"/>
                                         <prop type="object" name="properties" clientFlatten="True">
                                           <prop type="string" name="description"/>
@@ -1489,9 +1450,7 @@
                         <prop type="array<object>" name="virtualNetworkPeerings">
                           <item type="object">
                             <prop readOnly="True" type="string" name="etag"/>
-                            <prop type="ResourceId" name="id">
-                              <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworks/{}/virtualNetworkPeerings/{}"/>
-                            </prop>
+                            <prop type="string" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="boolean" name="allowForwardedTraffic"/>
@@ -1571,17 +1530,22 @@
           <response isError="True">
             <body>
               <json>
-                <schema type="@ODataV4Format"/>
+                <schema readOnly="True" type="@ODataV4Format"/>
               </json>
             </body>
           </response>
         </http>
       </operation>
-      <operation when="$Condition_VirtualNetworks_ListAll" operationId="VirtualNetworks_ListAll">
-        <http path="/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks">
+      <operation when="$Condition_VirtualNetworks_List" operationId="VirtualNetworks_List">
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks">
           <request method="get">
             <path>
-              <param type="uuid" name="subscriptionId" arg="$Path.subscriptionId" required="True"/>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format pattern="^[-\w\._\(\)]+$" maxLength="90" minLength="1"/>
+              </param>
+              <param type="uuid" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
             </path>
             <query>
               <const readOnly="True" const="True" type="string" name="api-version" required="True">
@@ -1599,9 +1563,7 @@
                     <item type="object">
                       <prop readOnly="True" type="string" name="etag"/>
                       <prop type="@CommonExtendedLocation_read" name="extendedLocation"/>
-                      <prop type="ResourceId" name="id">
-                        <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworks/{}"/>
-                      </prop>
+                      <prop type="string" name="id"/>
                       <prop type="ResourceLocation" name="location"/>
                       <prop readOnly="True" type="string" name="name"/>
                       <prop type="object" name="properties" clientFlatten="True">
@@ -1652,9 +1614,7 @@
                         <prop type="array<object>" name="virtualNetworkPeerings">
                           <item type="object">
                             <prop readOnly="True" type="string" name="etag"/>
-                            <prop type="ResourceId" name="id">
-                              <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Network/virtualNetworks/{}/virtualNetworkPeerings/{}"/>
-                            </prop>
+                            <prop type="string" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="boolean" name="allowForwardedTraffic"/>
@@ -1723,7 +1683,7 @@
           <response isError="True">
             <body>
               <json>
-                <schema type="@ODataV4Format"/>
+                <schema readOnly="True" type="@ODataV4Format"/>
               </json>
             </body>
           </response>
