@@ -117,7 +117,7 @@
                     </prop>
                     <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
                       <item type="object" cls="SubResourceReadOnly_read">
-                        <prop readOnly="True" type="string" name="id"/>
+                        <prop readOnly="True" type="ResourceId" name="id"/>
                       </item>
                     </prop>
                   </prop>
@@ -399,7 +399,7 @@
                     </prop>
                     <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
                       <item type="object" cls="SubResourceReadOnly_read">
-                        <prop readOnly="True" type="string" name="id"/>
+                        <prop readOnly="True" type="ResourceId" name="id"/>
                       </item>
                     </prop>
                   </prop>
@@ -619,7 +619,7 @@
                     </prop>
                     <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
                       <item type="object" cls="SubResourceReadOnly_read">
-                        <prop readOnly="True" type="string" name="id"/>
+                        <prop readOnly="True" type="ResourceId" name="id"/>
                       </item>
                     </prop>
                   </prop>
