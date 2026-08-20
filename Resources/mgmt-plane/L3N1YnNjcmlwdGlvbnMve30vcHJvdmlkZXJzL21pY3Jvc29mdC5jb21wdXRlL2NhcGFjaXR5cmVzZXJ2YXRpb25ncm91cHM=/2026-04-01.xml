@@ -82,7 +82,7 @@
                       <prop type="object" name="properties" clientFlatten="True">
                         <prop readOnly="True" type="array<object>" name="capacityReservations">
                           <item type="object" cls="SubResourceReadOnly_read">
-                            <prop readOnly="True" type="string" name="id"/>
+                            <prop readOnly="True" type="ResourceId" name="id"/>
                           </item>
                         </prop>
                         <prop readOnly="True" type="object" name="instanceView">
