@@ -61,7 +61,7 @@
                           <prop type="object" name="diskEncryptionKey">
                             <prop type="string" name="secretUrl" required="True"/>
                             <prop type="object" name="sourceVault" required="True" cls="SubResource_read">
-                              <prop type="string" name="id"/>
+                              <prop type="ResourceId" name="id"/>
                             </prop>
                           </prop>
                           <prop type="boolean" name="enabled"/>
