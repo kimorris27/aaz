@@ -329,7 +329,7 @@
                       <prop type="object" name="extensionProfile">
                         <prop type="array<object>" name="extensions" identifiers="name">
                           <item type="object">
-                            <prop readOnly="True" type="string" name="id"/>
+                            <prop readOnly="True" type="ResourceId" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="boolean" name="autoUpgradeMinorVersion"/>
@@ -3568,7 +3568,7 @@
                       <prop type="object" name="extensionProfile">
                         <prop type="array<object>" name="extensions" identifiers="name">
                           <item type="object">
-                            <prop readOnly="True" type="string" name="id"/>
+                            <prop readOnly="True" type="ResourceId" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="boolean" name="autoUpgradeMinorVersion"/>
@@ -5881,7 +5881,7 @@
                       <prop type="object" name="extensionProfile">
                         <prop type="array<object>" name="extensions" identifiers="name">
                           <item type="object">
-                            <prop readOnly="True" type="string" name="id"/>
+                            <prop readOnly="True" type="ResourceId" name="id"/>
                             <prop type="string" name="name"/>
                             <prop type="object" name="properties" clientFlatten="True">
                               <prop type="boolean" name="autoUpgradeMinorVersion"/>
@@ -7747,7 +7747,7 @@
                         <prop type="object" name="extensionProfile">
                           <prop type="array<object>" name="extensions" identifiers="name">
                             <item type="object">
-                              <prop readOnly="True" type="string" name="id"/>
+                              <prop readOnly="True" type="ResourceId" name="id"/>
                               <prop type="string" name="name"/>
                               <prop type="object" name="properties" clientFlatten="True">
                                 <prop type="boolean" name="autoUpgradeMinorVersion"/>
@@ -8769,7 +8769,7 @@
                         <prop type="object" name="extensionProfile">
                           <prop type="array<object>" name="extensions" identifiers="name">
                             <item type="object">
-                              <prop readOnly="True" type="string" name="id"/>
+                              <prop readOnly="True" type="ResourceId" name="id"/>
                               <prop type="string" name="name"/>
                               <prop type="object" name="properties" clientFlatten="True">
                                 <prop type="boolean" name="autoUpgradeMinorVersion"/>
@@ -9774,7 +9774,7 @@
                         <prop type="object" name="extensionProfile">
                           <prop type="array<object>" name="extensions" identifiers="name">
                             <item type="object">
-                              <prop readOnly="True" type="string" name="id"/>
+                              <prop readOnly="True" type="ResourceId" name="id"/>
                               <prop type="string" name="name"/>
                               <prop type="object" name="properties" clientFlatten="True">
                                 <prop type="boolean" name="autoUpgradeMinorVersion"/>

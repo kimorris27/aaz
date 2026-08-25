@@ -1,0 +1,688 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CodeGen plane="mgmt-plane">
+  <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.compute/capacityreservationgroups/{}/capacityreservations/{}" version="2026-04-01" swagger="mgmt-plane/compute/ResourceProviders/Microsoft.Compute/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9jYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBzL3tjYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBOYW1lfS9jYXBhY2l0eVJlc2VydmF0aW9ucy97Y2FwYWNpdHlSZXNlcnZhdGlvbk5hbWV9/V/MjAyNi0wNC0wMQ=="/>
+  <commandGroup name="capacity reservation">
+    <command name="show" version="2026-04-01" confirmation="">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.compute/capacityreservationgroups/{}/capacityreservations/{}" version="2026-04-01" swagger="mgmt-plane/compute/ResourceProviders/Microsoft.Compute/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9jYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBzL3tjYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBOYW1lfS9jYXBhY2l0eVJlc2VydmF0aW9ucy97Y2FwYWNpdHlSZXNlcnZhdGlvbk5hbWV9/V/MjAyNi0wNC0wMQ=="/>
+      <argGroup name="">
+        <arg type="string" var="$Path.capacityReservationGroupName" options="capacity-reservation-group c" required="True" group="" idPart="name">
+          <help short="The name of the capacity reservation group."/>
+        </arg>
+        <arg type="string" var="$Path.capacityReservationName" options="capacity-reservation-name name n" required="True" idPart="child_name_1">
+          <help short="The name of the capacity reservation."/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+        <arg type="string" var="$Query.expand" options="expand">
+          <help short="The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations."/>
+          <enum>
+            <item name="instanceView" value="&quot;instanceView&quot;"/>
+          </enum>
+        </arg>
+      </argGroup>
+      <operation operationId="CapacityReservations_Get">
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}">
+          <request method="get">
+            <path>
+              <param type="string" name="capacityReservationGroupName" arg="$Path.capacityReservationGroupName" required="True"/>
+              <param type="string" name="capacityReservationName" arg="$Path.capacityReservationName" required="True"/>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
+              <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <param type="string" name="$expand" arg="$Query.expand">
+                <enum>
+                  <item value="&quot;instanceView&quot;"/>
+                </enum>
+              </param>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2026-04-01&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+          </request>
+          <response statusCode="200">
+            <body>
+              <json var="$Instance">
+                <schema type="object">
+                  <prop readOnly="True" type="ResourceId" name="id">
+                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Compute/capacityReservationGroups/{}/capacityReservations/{}"/>
+                  </prop>
+                  <prop type="ResourceLocation" name="location" required="True"/>
+                  <prop readOnly="True" type="string" name="name"/>
+                  <prop type="object" name="properties" clientFlatten="True">
+                    <prop readOnly="True" type="object" name="instanceView">
+                      <prop type="object" name="reservationStateInfo">
+                        <prop type="string" name="reservationState">
+                          <enum>
+                            <item value="&quot;Approved&quot;"/>
+                            <item value="&quot;Committed&quot;"/>
+                            <item value="&quot;Declined&quot;"/>
+                            <item value="&quot;FulfillmentFailed&quot;"/>
+                            <item value="&quot;Live&quot;"/>
+                            <item value="&quot;PartiallyFulfilled&quot;"/>
+                            <item value="&quot;Pending&quot;"/>
+                          </enum>
+                        </prop>
+                      </prop>
+                      <prop type="array<object>" name="statuses">
+                        <item type="object">
+                          <prop type="string" name="code"/>
+                          <prop type="string" name="displayStatus"/>
+                          <prop type="string" name="level">
+                            <enum>
+                              <item value="&quot;Error&quot;"/>
+                              <item value="&quot;Info&quot;"/>
+                              <item value="&quot;Warning&quot;"/>
+                            </enum>
+                          </prop>
+                          <prop type="string" name="message"/>
+                          <prop type="dateTime" name="time">
+                            <format protocol="iso"/>
+                          </prop>
+                        </item>
+                      </prop>
+                      <prop type="object" name="utilizationInfo">
+                        <prop readOnly="True" type="integer32" name="currentCapacity"/>
+                        <prop readOnly="True" type="object" name="usedReservedCountBySubscription">
+                          <additionalProp readOnly="True">
+                            <item type="integer32"/>
+                          </additionalProp>
+                        </prop>
+                        <prop readOnly="True" type="array<@SubResourceReadOnly_read>" name="virtualMachinesAllocated">
+                          <item type="@SubResourceReadOnly_read"/>
+                        </prop>
+                      </prop>
+                    </prop>
+                    <prop readOnly="True" type="integer32" name="platformFaultDomainCount"/>
+                    <prop readOnly="True" type="string" name="provisioningState"/>
+                    <prop readOnly="True" type="dateTime" name="provisioningTime">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="string" name="reservationId"/>
+                    <prop type="object" name="scheduleProfile">
+                      <prop type="string" name="end"/>
+                      <prop type="integer32" name="minimumCommitmentDays"/>
+                      <prop readOnly="True" type="dateTime" name="modifiableUntil">
+                        <format protocol="iso"/>
+                      </prop>
+                      <prop type="string" name="start"/>
+                    </prop>
+                    <prop readOnly="True" type="dateTime" name="timeCreated">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
+                      <item type="object" cls="SubResourceReadOnly_read">
+                        <prop readOnly="True" type="ResourceId" name="id"/>
+                      </item>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="sku" required="True">
+                    <prop type="integer64" name="capacity"/>
+                    <prop type="string" name="name"/>
+                    <prop type="string" name="tier"/>
+                  </prop>
+                  <prop readOnly="True" type="object" name="systemData">
+                    <prop type="dateTime" name="createdAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="createdBy"/>
+                    <prop type="string" name="createdByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                    <prop type="dateTime" name="lastModifiedAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="lastModifiedBy"/>
+                    <prop type="string" name="lastModifiedByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="tags">
+                    <additionalProp>
+                      <item type="string"/>
+                    </additionalProp>
+                  </prop>
+                  <prop readOnly="True" type="string" name="type"/>
+                  <prop type="array<string>" name="zones">
+                    <item type="string"/>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </response>
+          <response isError="True">
+            <body>
+              <json>
+                <schema type="@ODataV4Format"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+      <output type="object" ref="$Instance" clientFlatten="True"/>
+    </command>
+    <command name="delete" version="2026-04-01" confirmation="Are you sure you want to perform this operation?">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.compute/capacityreservationgroups/{}/capacityreservations/{}" version="2026-04-01" swagger="mgmt-plane/compute/ResourceProviders/Microsoft.Compute/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9jYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBzL3tjYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBOYW1lfS9jYXBhY2l0eVJlc2VydmF0aW9ucy97Y2FwYWNpdHlSZXNlcnZhdGlvbk5hbWV9/V/MjAyNi0wNC0wMQ=="/>
+      <argGroup name="">
+        <arg type="string" var="$Path.capacityReservationGroupName" options="capacity-reservation-group c" required="True" group="" idPart="name">
+          <help short="The name of the capacity reservation group."/>
+        </arg>
+        <arg type="string" var="$Path.capacityReservationName" options="capacity-reservation-name name n" required="True" idPart="child_name_1">
+          <help short="The name of the capacity reservation."/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+      </argGroup>
+      <operation operationId="CapacityReservations_Delete">
+        <longRunning finalStateVia="location"/>
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}">
+          <request method="delete">
+            <path>
+              <param type="string" name="capacityReservationGroupName" arg="$Path.capacityReservationGroupName" required="True"/>
+              <param type="string" name="capacityReservationName" arg="$Path.capacityReservationName" required="True"/>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
+              <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2026-04-01&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+          </request>
+          <response statusCode="200"/>
+          <response statusCode="202">
+            <header>
+              <item name="Location"/>
+              <item name="Retry-After"/>
+            </header>
+          </response>
+          <response statusCode="204"/>
+          <response isError="True">
+            <body>
+              <json>
+                <schema type="@ODataV4Format"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+    </command>
+    <command name="create" version="2026-04-01">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.compute/capacityreservationgroups/{}/capacityreservations/{}" version="2026-04-01" swagger="mgmt-plane/compute/ResourceProviders/Microsoft.Compute/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9jYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBzL3tjYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBOYW1lfS9jYXBhY2l0eVJlc2VydmF0aW9ucy97Y2FwYWNpdHlSZXNlcnZhdGlvbk5hbWV9/V/MjAyNi0wNC0wMQ=="/>
+      <argGroup name="">
+        <arg type="string" var="$Path.capacityReservationGroupName" options="capacity-reservation-group c" required="True" group="" idPart="name">
+          <help short="The name of the capacity reservation group."/>
+        </arg>
+        <arg type="string" var="$Path.capacityReservationName" options="capacity-reservation-name name n" required="True" idPart="child_name_1">
+          <help short="The name of the capacity reservation."/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+      </argGroup>
+      <argGroup name="Parameters">
+        <arg type="ResourceLocation" var="$parameters.location" options="location l" required="True" group="Parameters">
+          <help short="Resource location"/>
+        </arg>
+        <arg type="object" var="$parameters.tags" options="tags" group="Parameters">
+          <help short="Resource tags"/>
+          <additionalProp>
+            <item type="string"/>
+          </additionalProp>
+        </arg>
+        <arg type="array<string>" var="$parameters.zones" options="zone z" group="Parameters">
+          <help short="Availability Zone to use for this capacity reservation. The zone has to be single value and also should be part for the list of zones specified during the capacity reservation group creation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone."/>
+          <item type="string"/>
+        </arg>
+      </argGroup>
+      <argGroup name="Properties">
+        <arg type="object" var="$parameters.properties.scheduleProfile" options="schedule-profile" group="Properties">
+          <help short="Defines the schedule for Block and Future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01. Future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Please refer to https://aka.ms/futurecapacityreservation for more details. Minimum API version for Future capacity reservations: 2026-04-01."/>
+          <arg type="string" var="$parameters.properties.scheduleProfile.end" options="end">
+            <help short="The required end date for Block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."/>
+          </arg>
+          <arg type="integer32" var="$parameters.properties.scheduleProfile.minimumCommitmentDays" options="minimum-commitment-days">
+            <help short="The minimum number of days that must pass after the start date before a Future capacity reservation can be updated or deleted once it has been committed. Will be populated with a default value if not provided."/>
+          </arg>
+          <arg type="string" var="$parameters.properties.scheduleProfile.start" options="start">
+            <help short="The required start date for Block or Future capacity reservations. Block capacity reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future capacity reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Minimum API version for Future capacity reservations: 2026-04-01. Example: 2025-06-27, applicable for both Block and Future capacity reservations."/>
+          </arg>
+        </arg>
+      </argGroup>
+      <argGroup name="Sku">
+        <arg type="integer64" var="$parameters.sku.capacity" options="capacity" group="Sku">
+          <help short="Specify the number of virtual machines in the scale set."/>
+        </arg>
+        <arg type="string" var="$parameters.sku.name" options="sku s" group="Sku">
+          <help short="The SKU of the resource for which capacity needs be reserved. Currently VM Skus with the capability called \&quot;CapacityReservationSupported\&quot; set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://learn.microsoft.com/rest/api/compute/resourceskus/list) for supported values."/>
+        </arg>
+        <arg type="string" var="$parameters.sku.tier" options="tier" hide="True" group="Sku">
+          <help short="Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"/>
+        </arg>
+      </argGroup>
+      <operation operationId="CapacityReservations_CreateOrUpdate">
+        <longRunning finalStateVia="location"/>
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}">
+          <request method="put">
+            <path>
+              <param type="string" name="capacityReservationGroupName" arg="$Path.capacityReservationGroupName" required="True"/>
+              <param type="string" name="capacityReservationName" arg="$Path.capacityReservationName" required="True"/>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
+              <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2026-04-01&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+            <body>
+              <json>
+                <schema type="object" name="parameters" required="True" clientFlatten="True">
+                  <prop type="ResourceLocation" name="location" arg="$parameters.location" required="True"/>
+                  <prop type="object" name="properties" clientFlatten="True">
+                    <prop type="object" name="scheduleProfile" arg="$parameters.properties.scheduleProfile">
+                      <prop type="string" name="end" arg="$parameters.properties.scheduleProfile.end"/>
+                      <prop type="integer32" name="minimumCommitmentDays" arg="$parameters.properties.scheduleProfile.minimumCommitmentDays"/>
+                      <prop type="string" name="start" arg="$parameters.properties.scheduleProfile.start"/>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="sku" required="True">
+                    <prop type="integer64" name="capacity" arg="$parameters.sku.capacity"/>
+                    <prop type="string" name="name" arg="$parameters.sku.name"/>
+                    <prop type="string" name="tier" arg="$parameters.sku.tier"/>
+                  </prop>
+                  <prop type="object" name="tags" arg="$parameters.tags">
+                    <additionalProp>
+                      <item type="string"/>
+                    </additionalProp>
+                  </prop>
+                  <prop type="array<string>" name="zones" arg="$parameters.zones">
+                    <item type="string"/>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </request>
+          <response statusCode="200 201">
+            <body>
+              <json var="$Instance">
+                <schema type="object">
+                  <prop readOnly="True" type="ResourceId" name="id">
+                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Compute/capacityReservationGroups/{}/capacityReservations/{}"/>
+                  </prop>
+                  <prop type="ResourceLocation" name="location" required="True"/>
+                  <prop readOnly="True" type="string" name="name"/>
+                  <prop type="object" name="properties" clientFlatten="True">
+                    <prop readOnly="True" type="object" name="instanceView">
+                      <prop type="object" name="reservationStateInfo">
+                        <prop type="string" name="reservationState">
+                          <enum>
+                            <item value="&quot;Approved&quot;"/>
+                            <item value="&quot;Committed&quot;"/>
+                            <item value="&quot;Declined&quot;"/>
+                            <item value="&quot;FulfillmentFailed&quot;"/>
+                            <item value="&quot;Live&quot;"/>
+                            <item value="&quot;PartiallyFulfilled&quot;"/>
+                            <item value="&quot;Pending&quot;"/>
+                          </enum>
+                        </prop>
+                      </prop>
+                      <prop type="array<object>" name="statuses">
+                        <item type="object">
+                          <prop type="string" name="code"/>
+                          <prop type="string" name="displayStatus"/>
+                          <prop type="string" name="level">
+                            <enum>
+                              <item value="&quot;Error&quot;"/>
+                              <item value="&quot;Info&quot;"/>
+                              <item value="&quot;Warning&quot;"/>
+                            </enum>
+                          </prop>
+                          <prop type="string" name="message"/>
+                          <prop type="dateTime" name="time">
+                            <format protocol="iso"/>
+                          </prop>
+                        </item>
+                      </prop>
+                      <prop type="object" name="utilizationInfo">
+                        <prop readOnly="True" type="integer32" name="currentCapacity"/>
+                        <prop readOnly="True" type="object" name="usedReservedCountBySubscription">
+                          <additionalProp readOnly="True">
+                            <item type="integer32"/>
+                          </additionalProp>
+                        </prop>
+                        <prop readOnly="True" type="array<@SubResourceReadOnly_read>" name="virtualMachinesAllocated">
+                          <item type="@SubResourceReadOnly_read"/>
+                        </prop>
+                      </prop>
+                    </prop>
+                    <prop readOnly="True" type="integer32" name="platformFaultDomainCount"/>
+                    <prop readOnly="True" type="string" name="provisioningState"/>
+                    <prop readOnly="True" type="dateTime" name="provisioningTime">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="string" name="reservationId"/>
+                    <prop type="object" name="scheduleProfile">
+                      <prop type="string" name="end"/>
+                      <prop type="integer32" name="minimumCommitmentDays"/>
+                      <prop readOnly="True" type="dateTime" name="modifiableUntil">
+                        <format protocol="iso"/>
+                      </prop>
+                      <prop type="string" name="start"/>
+                    </prop>
+                    <prop readOnly="True" type="dateTime" name="timeCreated">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
+                      <item type="object" cls="SubResourceReadOnly_read">
+                        <prop readOnly="True" type="ResourceId" name="id"/>
+                      </item>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="sku" required="True">
+                    <prop type="integer64" name="capacity"/>
+                    <prop type="string" name="name"/>
+                    <prop type="string" name="tier"/>
+                  </prop>
+                  <prop readOnly="True" type="object" name="systemData">
+                    <prop type="dateTime" name="createdAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="createdBy"/>
+                    <prop type="string" name="createdByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                    <prop type="dateTime" name="lastModifiedAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="lastModifiedBy"/>
+                    <prop type="string" name="lastModifiedByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="tags">
+                    <additionalProp>
+                      <item type="string"/>
+                    </additionalProp>
+                  </prop>
+                  <prop readOnly="True" type="string" name="type"/>
+                  <prop type="array<string>" name="zones">
+                    <item type="string"/>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </response>
+          <response isError="True">
+            <body>
+              <json>
+                <schema type="@ODataV4Format"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+      <output type="object" ref="$Instance" clientFlatten="True"/>
+    </command>
+    <command name="update" version="2026-04-01">
+      <resource id="/subscriptions/{}/resourcegroups/{}/providers/microsoft.compute/capacityreservationgroups/{}/capacityreservations/{}" version="2026-04-01" swagger="mgmt-plane/compute/ResourceProviders/Microsoft.Compute/Paths/L3N1YnNjcmlwdGlvbnMve3N1YnNjcmlwdGlvbklkfS9yZXNvdXJjZUdyb3Vwcy97cmVzb3VyY2VHcm91cE5hbWV9L3Byb3ZpZGVycy9NaWNyb3NvZnQuQ29tcHV0ZS9jYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBzL3tjYXBhY2l0eVJlc2VydmF0aW9uR3JvdXBOYW1lfS9jYXBhY2l0eVJlc2VydmF0aW9ucy97Y2FwYWNpdHlSZXNlcnZhdGlvbk5hbWV9/V/MjAyNi0wNC0wMQ=="/>
+      <argGroup name="">
+        <arg type="string" var="$Path.capacityReservationGroupName" options="capacity-reservation-group c" required="True" group="" idPart="name">
+          <help short="The name of the capacity reservation group."/>
+        </arg>
+        <arg type="string" var="$Path.capacityReservationName" options="capacity-reservation-name name n" required="True" idPart="child_name_1">
+          <help short="The name of the capacity reservation."/>
+        </arg>
+        <arg type="ResourceGroupName" var="$Path.resourceGroupName" options="resource-group g" required="True" idPart="resource_group"/>
+        <arg type="SubscriptionId" var="$Path.subscriptionId" options="subscription" required="True" idPart="subscription"/>
+      </argGroup>
+      <argGroup name="Parameters">
+        <arg type="object" var="$parameters.tags" options="tags" group="Parameters">
+          <help short="Resource tags"/>
+          <additionalProp>
+            <item type="string"/>
+          </additionalProp>
+        </arg>
+      </argGroup>
+      <argGroup name="Properties">
+        <arg type="object" var="$parameters.properties.scheduleProfile" options="schedule-profile" group="Properties">
+          <help short="Defines the schedule for Block and Future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01. Future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Please refer to https://aka.ms/futurecapacityreservation for more details. Minimum API version for Future capacity reservations: 2026-04-01."/>
+          <arg type="string" var="$parameters.properties.scheduleProfile.end" options="end">
+            <help short="The required end date for Block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."/>
+          </arg>
+          <arg type="integer32" var="$parameters.properties.scheduleProfile.minimumCommitmentDays" options="minimum-commitment-days">
+            <help short="The minimum number of days that must pass after the start date before a Future capacity reservation can be updated or deleted once it has been committed. Will be populated with a default value if not provided."/>
+          </arg>
+          <arg type="string" var="$parameters.properties.scheduleProfile.start" options="start">
+            <help short="The required start date for Block or Future capacity reservations. Block capacity reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future capacity reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Minimum API version for Future capacity reservations: 2026-04-01. Example: 2025-06-27, applicable for both Block and Future capacity reservations."/>
+          </arg>
+        </arg>
+      </argGroup>
+      <argGroup name="Sku">
+        <arg type="integer64" var="$parameters.sku.capacity" options="capacity" group="Sku">
+          <help short="Specify the number of virtual machines in the scale set."/>
+        </arg>
+        <arg type="string" var="$parameters.sku.name" options="sku s" hide="True" group="Sku">
+          <help short="The SKU of the resource for which capacity needs be reserved. Currently VM Skus with the capability called \&quot;CapacityReservationSupported\&quot; set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://learn.microsoft.com/rest/api/compute/resourceskus/list) for supported values."/>
+        </arg>
+        <arg type="string" var="$parameters.sku.tier" options="tier" hide="True" group="Sku">
+          <help short="Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"/>
+        </arg>
+      </argGroup>
+      <operation operationId="CapacityReservations_Update">
+        <longRunning finalStateVia="location"/>
+        <http path="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}">
+          <request method="patch">
+            <path>
+              <param type="string" name="capacityReservationGroupName" arg="$Path.capacityReservationGroupName" required="True"/>
+              <param type="string" name="capacityReservationName" arg="$Path.capacityReservationName" required="True"/>
+              <param type="string" name="resourceGroupName" arg="$Path.resourceGroupName" required="True">
+                <format maxLength="90" minLength="1"/>
+              </param>
+              <param type="string" name="subscriptionId" arg="$Path.subscriptionId" required="True">
+                <format minLength="1"/>
+              </param>
+            </path>
+            <query>
+              <const readOnly="True" const="True" type="string" name="api-version" required="True">
+                <default value="&quot;2026-04-01&quot;"/>
+                <format minLength="1"/>
+              </const>
+            </query>
+            <body>
+              <json>
+                <schema type="object" name="parameters" required="True" clientFlatten="True">
+                  <prop type="object" name="properties" clientFlatten="True">
+                    <prop type="object" name="scheduleProfile" arg="$parameters.properties.scheduleProfile">
+                      <prop type="string" name="end" arg="$parameters.properties.scheduleProfile.end"/>
+                      <prop type="integer32" name="minimumCommitmentDays" arg="$parameters.properties.scheduleProfile.minimumCommitmentDays"/>
+                      <prop type="string" name="start" arg="$parameters.properties.scheduleProfile.start"/>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="sku">
+                    <prop type="integer64" name="capacity" arg="$parameters.sku.capacity"/>
+                    <prop type="string" name="name" arg="$parameters.sku.name"/>
+                    <prop type="string" name="tier" arg="$parameters.sku.tier"/>
+                  </prop>
+                  <prop type="object" name="tags" arg="$parameters.tags">
+                    <additionalProp>
+                      <item type="string"/>
+                    </additionalProp>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </request>
+          <response statusCode="200">
+            <body>
+              <json var="$Instance">
+                <schema type="object">
+                  <prop readOnly="True" type="ResourceId" name="id">
+                    <format template="/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Compute/capacityReservationGroups/{}/capacityReservations/{}"/>
+                  </prop>
+                  <prop type="ResourceLocation" name="location" required="True"/>
+                  <prop readOnly="True" type="string" name="name"/>
+                  <prop type="object" name="properties" clientFlatten="True">
+                    <prop readOnly="True" type="object" name="instanceView">
+                      <prop type="object" name="reservationStateInfo">
+                        <prop type="string" name="reservationState">
+                          <enum>
+                            <item value="&quot;Approved&quot;"/>
+                            <item value="&quot;Committed&quot;"/>
+                            <item value="&quot;Declined&quot;"/>
+                            <item value="&quot;FulfillmentFailed&quot;"/>
+                            <item value="&quot;Live&quot;"/>
+                            <item value="&quot;PartiallyFulfilled&quot;"/>
+                            <item value="&quot;Pending&quot;"/>
+                          </enum>
+                        </prop>
+                      </prop>
+                      <prop type="array<object>" name="statuses">
+                        <item type="object">
+                          <prop type="string" name="code"/>
+                          <prop type="string" name="displayStatus"/>
+                          <prop type="string" name="level">
+                            <enum>
+                              <item value="&quot;Error&quot;"/>
+                              <item value="&quot;Info&quot;"/>
+                              <item value="&quot;Warning&quot;"/>
+                            </enum>
+                          </prop>
+                          <prop type="string" name="message"/>
+                          <prop type="dateTime" name="time">
+                            <format protocol="iso"/>
+                          </prop>
+                        </item>
+                      </prop>
+                      <prop type="object" name="utilizationInfo">
+                        <prop readOnly="True" type="integer32" name="currentCapacity"/>
+                        <prop readOnly="True" type="object" name="usedReservedCountBySubscription">
+                          <additionalProp readOnly="True">
+                            <item type="integer32"/>
+                          </additionalProp>
+                        </prop>
+                        <prop readOnly="True" type="array<@SubResourceReadOnly_read>" name="virtualMachinesAllocated">
+                          <item type="@SubResourceReadOnly_read"/>
+                        </prop>
+                      </prop>
+                    </prop>
+                    <prop readOnly="True" type="integer32" name="platformFaultDomainCount"/>
+                    <prop readOnly="True" type="string" name="provisioningState"/>
+                    <prop readOnly="True" type="dateTime" name="provisioningTime">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="string" name="reservationId"/>
+                    <prop type="object" name="scheduleProfile">
+                      <prop type="string" name="end"/>
+                      <prop type="integer32" name="minimumCommitmentDays"/>
+                      <prop readOnly="True" type="dateTime" name="modifiableUntil">
+                        <format protocol="iso"/>
+                      </prop>
+                      <prop type="string" name="start"/>
+                    </prop>
+                    <prop readOnly="True" type="dateTime" name="timeCreated">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop readOnly="True" type="array<object>" name="virtualMachinesAssociated">
+                      <item type="object" cls="SubResourceReadOnly_read">
+                        <prop readOnly="True" type="ResourceId" name="id"/>
+                      </item>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="sku" required="True">
+                    <prop type="integer64" name="capacity"/>
+                    <prop type="string" name="name"/>
+                    <prop type="string" name="tier"/>
+                  </prop>
+                  <prop readOnly="True" type="object" name="systemData">
+                    <prop type="dateTime" name="createdAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="createdBy"/>
+                    <prop type="string" name="createdByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                    <prop type="dateTime" name="lastModifiedAt">
+                      <format protocol="iso"/>
+                    </prop>
+                    <prop type="string" name="lastModifiedBy"/>
+                    <prop type="string" name="lastModifiedByType">
+                      <enum>
+                        <item value="&quot;Application&quot;"/>
+                        <item value="&quot;Key&quot;"/>
+                        <item value="&quot;ManagedIdentity&quot;"/>
+                        <item value="&quot;User&quot;"/>
+                      </enum>
+                    </prop>
+                  </prop>
+                  <prop type="object" name="tags">
+                    <additionalProp>
+                      <item type="string"/>
+                    </additionalProp>
+                  </prop>
+                  <prop readOnly="True" type="string" name="type"/>
+                  <prop type="array<string>" name="zones">
+                    <item type="string"/>
+                  </prop>
+                </schema>
+              </json>
+            </body>
+          </response>
+          <response statusCode="202">
+            <header>
+              <item name="Location"/>
+              <item name="Retry-After"/>
+            </header>
+          </response>
+          <response isError="True">
+            <body>
+              <json>
+                <schema type="@ODataV4Format"/>
+              </json>
+            </body>
+          </response>
+        </http>
+      </operation>
+      <output type="object" ref="$Instance" clientFlatten="True"/>
+    </command>
+  </commandGroup>
+</CodeGen>

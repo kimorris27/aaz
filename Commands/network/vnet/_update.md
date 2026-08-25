@@ -176,8 +176,3 @@ Update a virtual network.
     ```bash
         network vnet update --resource-group rg1 --name test-vnet --summarized-gateway-prefixes address-prefixes="[10.0.0.0/16,10.1.0.0/16]"
     ```
-
-- For --summarized-gateway-prefixes with ipam-pool-prefix-allocations
-    ```bash
-        network vnet update --resource-group rg1 --name test-vnet --summarized-gateway-prefixes ipam-pool-prefix-allocations="[{id:<pool-resource-id>,number-of-ip-addresses:10}]"
-    ```

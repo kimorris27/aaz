@@ -153,8 +153,3 @@ You may also create a subnet at the same time by specifying a subnet name and (o
     ```bash
         network vnet create --resource-group rg1 --name test-vnet --location eastus --address-prefixes 10.0.0.0/16 --summarized-gateway-prefixes address-prefixes="[10.0.0.0/16]"
     ```
-
-- For --summarized-gateway-prefixes with ipam-pool-prefix-allocations
-    ```bash
-        network vnet create -g {rg} -n {vnet} --address-prefixes 10.0.0.0/16 --summarized-gateway-prefixes ipam-pool-prefix-allocations="[{id:<pool-resource-id>,number-of-ip-addresses:10}]"
-    ```
